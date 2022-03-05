@@ -16,6 +16,14 @@ function App() {
     genre: ''
   })
 
+  // Set state to hold data when editing a row
+  const [editAlbumData, setEditAlbumData] = useState ({
+    album: '',
+    artist: '',
+    released: '',
+    genre: ''
+  })
+
   // Set state for editing rows
   const [editAlbumId, setEditAlbumId] = useState(null)
 
@@ -31,6 +39,19 @@ function App() {
     newFormData[fieldName] = fieldValue
 
     setAddAlbumData(newFormData)
+  }
+
+  // 
+  const handleEditFormChange = (e) => {
+    e.preventDefault()
+
+    const fieldName = e.target.getAttribute('name')
+    const fieldValue = e.target.value
+
+    const newFormData = { ...editAlbumData }
+    newFormData[fieldName] = fieldValue
+
+    setEditAlbumData(newFormData)
   }
 
   // Handles the submit logic of the form
@@ -51,7 +72,20 @@ function App() {
     setAlbumInfo(newAlbumInfoArray)
   }
 
+  // Handles Edit button
+  const handleEditClick = (e, albumInfo) => {
+    e.preventDefault()
+    setEditAlbumId(albumInfo.id)
 
+    const formValues = {
+      album: albumInfo.album,
+      artist: albumInfo.artist, 
+      released: albumInfo.released,
+      genre: albumInfo.genre
+    }
+    // Save new edited values into the current state
+    setEditAlbumData(formValues)
+  }
 
   return (
     <div className="app-container">
@@ -65,15 +99,22 @@ function App() {
             <th>Artist</th>
             <th>Released</th>
             <th>Genre</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {albumInfo.map((albumInfo) => (
             <Fragment>
               {editAlbumId === albumInfo.id ? (
-                  <EditableRow />
+                  <EditableRow 
+                    editAlbumData={editAlbumData} 
+                    handleEditFormChange={handleEditFormChange} 
+                  />
                 ) : (
-                  <ReadOnlyRow albumInfo={albumInfo}/>
+                  <ReadOnlyRow 
+                    albumInfo={albumInfo} 
+                    handleEditClick={handleEditClick}
+                  />
               )}           
             </Fragment>
           ))}        

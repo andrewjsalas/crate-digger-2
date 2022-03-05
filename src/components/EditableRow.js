@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditableRow = () => {
+const EditableRow = ({editAlbumData, handleEditFormChange}) => {
   return (
     <tr>
       <td>
@@ -9,6 +9,8 @@ const EditableRow = () => {
           required='required' 
           placeholder='Enter an album' 
           name='album' 
+          value={editAlbumData.album}
+          onChange={handleEditFormChange}
         />
       </td>
       <td>
@@ -17,6 +19,8 @@ const EditableRow = () => {
           required='required' 
           placeholder='Enter an artist' 
           name='artist' 
+          value={editAlbumData.artist}
+          onChange={handleEditFormChange}
         />
       </td>
       <td>
@@ -25,6 +29,8 @@ const EditableRow = () => {
           required='required' 
           placeholder='Enter a release year' 
           name='released' 
+          value={editAlbumData.released}
+          onChange={handleEditFormChange}
         />
       </td>
       <td>
@@ -33,7 +39,12 @@ const EditableRow = () => {
           required='required' 
           placeholder='Enter a genre' 
           name='genre' 
+          value={editAlbumData.genre}
+          onChange={handleEditFormChange}
         />
+      </td>
+      <td>
+        <button type='submit'>Save</button>
       </td>
     </tr>
   )
