@@ -1,7 +1,11 @@
 import './App.css';
 import mockData from './mockData';
+import { Fragment } from 'react';
 import { useState } from 'react';
 import { nanoid } from 'nanoid'
+import Header from './components/Header';
+import ReadOnlyRow from './components/ReadOnlyRow';
+import EditableRow from './components/EditableRow';
 
 function App() {
   const [albumInfo, setAlbumInfo] = useState(mockData)
@@ -11,6 +15,9 @@ function App() {
     released: '',
     genre: ''
   })
+
+  // Set state for editing rows
+  const [editAlbumId, setEditAlbumId] = useState(null)
 
   // Assigns user form input to the corresponding name attributes 
   // that is set in addAlbumData 
@@ -48,7 +55,10 @@ function App() {
 
   return (
     <div className="app-container">
+      <Header />
+      <form>
       <table>
+        {/* TABLE */}
         <thead>
           <tr>
             <th>Album</th>
@@ -59,48 +69,52 @@ function App() {
         </thead>
         <tbody>
           {albumInfo.map((albumInfo) => (
-            <tr>
-              <td>{albumInfo.album}</td>
-              <td>{albumInfo.artist}</td>
-              <td>{albumInfo.released}</td>
-              <td>{albumInfo.genre}</td>
-            </tr>
+            <Fragment>
+              {editAlbumId === albumInfo.id ? (
+                  <EditableRow />
+                ) : (
+                  <ReadOnlyRow albumInfo={albumInfo}/>
+              )}           
+            </Fragment>
           ))}        
         </tbody>
       </table>
+      </form>
 
-      <h2>Add an album</h2>
+      {/* SUMBIT ALBUM FORM */}
+      <h2 className='form-header'>Add an album</h2>
       <form onSubmit={handleAddFormSubmit}>
         <input 
           type='text' 
           name='album' 
           required='required' 
-          placeholder='Enter An Album' 
+          placeholder='Enter an album' 
           onChange={handleAddFormChange}
         />
         <input 
           type='text' 
           name='artist' 
           required='required' 
-          placeholder='Enter An Artist' 
+          placeholder='Enter an artist' 
           onChange={handleAddFormChange}
         />
         <input 
           type='text' 
           name='released' 
           required='required' 
-          placeholder='Enter The Release' 
+          placeholder='Enter a release year' 
           onChange={handleAddFormChange}
         />
         <input 
           type='text' 
           name='genre' 
           required='required' 
-          placeholder='Enter The Genre' 
+          placeholder='Enter a genre' 
           onChange={handleAddFormChange}
         />
         <button type='submit'>Add</button>
       </form>
+
     </div>
   );
 }

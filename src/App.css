@@ -11,6 +11,13 @@
   padding: 1.5rem;
 }
 
+/* Header Styles */
+.header-container {
+  text-align: center;
+  margin: 0.5rem;
+  font-size: 1.5rem;
+}
+
 /* Table Styles */
 table {
   border-collapse: collapse;
@@ -34,6 +41,10 @@ form {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+}
+
+.form-header {
+  font-size: 2rem;
 }
 
 form td:last-child {
