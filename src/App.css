@@ -1,42 +1,156 @@
 /* Font Imports */
-
-/* Set Variables */
+@import url('https://fonts.googleapis.com/css2?family=Heebo&family=Hind+Siliguri&family=Roboto&display=swap');
+/* Heebo, Hind Siliguri, Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fjalla+One&family=Pathway+Gothic+One&family=Yanone+Kaffeesatz&display=swap');
+/* Bebas Neue, Fjalla One, Pathway Gothic one, Yanone Kaffeesatz */
 
 /* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #171618;
+}
 
 .app-container {
+  margin-right: auto;
+  margin-left: auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: 90%;
   gap: 10px;
   padding: 1.5rem;
+}
+
+/* Nav Styles */
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-image: linear-gradient(62deg, #28313a 0%, #171618 100%);
+  padding: 16px 22px;
+}
+
+.nav-container h1 {
+  color: white;
+  font-size: 28px;
+  font-family: 'Pathway Gothic one', sans-serif;
 }
 
 /* Header Styles */
 .header-container {
   text-align: center;
-  margin: 0.5rem;
-  font-size: 1.5rem;
+  margin-top: 5rem;
+  font-size: 2.5rem;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.header-container h3 {
+  text-align: center;
+  color: white;
 }
 
 /* Table Styles */
 table {
   border-collapse: collapse;
   width: 100%;
+  margin-top: 2rem;
+  border: 1px solid rgb(0, 0, 0);
 }
 
-th,
+/* th,
 td {
-  border: 1px solid black;
   text-align: left;
   padding: 8px;
-  font-size: 32px;
-}
+  font-size: 35px;
+} */
 
 th {
-  background-color: aliceblue;
+  background-color: #28313a;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  text-align: left;
+  padding: 10px;
 }
 
-/* Form Styles */
+tr {
+  background-color: white;
+  text-align: left;
+}
+
+td {
+  align-items: center;
+  font-family: 'Hind Siliguri', sans-serif;
+  padding: 5px;
+}
+
+.read-only-rows {
+  transition: 0.5s;
+}
+
+.read-only-rows:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* .read-only-rows .actions-button-container {
+  display: flex;
+} */
+
+.read-only-rows .edit-button {
+  border: none;
+  background-color: lightblue;
+  padding: 1px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 25px;
+}
+
+.read-only-rows .delete-button {
+  border-style: none;
+  background-color: rgb(255, 144, 144);
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.read-only-rows .delete-button:hover {
+  background-color: rgb(255, 85, 85);
+}
+
+.read-only-rows .edit-button:hover {
+  background-color: rgb(107, 181, 206);
+}
+
+.editable-row .save-button {
+  display: block;
+  width: 25%;
+  border-style: none;
+  background-color: lightblue;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.editable-row .cancel-button {
+  display: block;
+  width: 40%;
+  border-style: none;
+  background-color: rgb(255, 144, 144);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Add Form Styles */
 form {
   display: flex;
   flex-wrap: wrap;
@@ -44,7 +158,11 @@ form {
 }
 
 .form-header {
-  font-size: 2rem;
+  margin-top: 35px;
+  font-size: 1.5rem;
+  font-family: 'Hind Siliguri', sans-serif;
+  color: white;
+  font-weight: 600;
 }
 
 form td:last-child {
@@ -54,4 +172,39 @@ form td:last-child {
 
 form * {
   font-size: 28px;
+}
+
+.input-form-container {
+  display: flex;
+  transition: 0.4s;
+  border: none;
+}
+
+.input-form-container input {
+  display: flex;
+}
+
+.input-form-container input:hover {
+  background-color: rgb(228, 228, 228);
+}
+
+.input-form-container button {
+  background-color: #000000;
+  border: 1px solid white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+}
+
+/* Footer Styles */
+.footer {
+  font-family: 'Heebo', sans-serif;
+  color: rgb(175, 175, 175);
+  padding: 2rem;
+  margin: 2rem;
+  text-align: center;
+  position: relative;
 }

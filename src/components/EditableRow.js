@@ -2,7 +2,7 @@ import React from 'react'
 
 const EditableRow = ({editAlbumData, handleEditFormChange, handleCancelClick }) => {
   return (
-    <tr>
+    <tr className='editable-row'>
       <td>
         <input 
           type='text' 
@@ -44,8 +44,17 @@ const EditableRow = ({editAlbumData, handleEditFormChange, handleCancelClick }) 
         />
       </td>
       <td>
-        <button type='submit'>Save</button>
-        <button type='button' onClick={handleCancelClick}>Cancel</button>
+        <button
+          className='save-button' 
+          type='submit'
+        >Save
+        </button>
+        <button 
+          className='cancel-button'
+          type='button' 
+          onClick={handleCancelClick}
+        >Cancel
+        </button>
       </td>
     </tr>
   )

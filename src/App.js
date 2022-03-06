@@ -6,6 +6,10 @@ import { nanoid } from 'nanoid'
 import Header from './components/Header';
 import ReadOnlyRow from './components/ReadOnlyRow';
 import EditableRow from './components/EditableRow';
+import Navbar from './components/Navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {  } from '@fortawesome/free-solid-svg-icons'
+import Footer from './components/Footer';
 
 function App() {
   const [albumInfo, setAlbumInfo] = useState(mockData)
@@ -141,20 +145,22 @@ function App() {
 
   return (
     <div className="app-container">
+      <Navbar />
       <Header />
-      <form onSubmit={handleEditFormSubmit}>
+
+      {/* TABLE */}
+      <form className='table-container' onSubmit={handleEditFormSubmit}>
       <table>
-        {/* TABLE */}
-        <thead>
-          <tr>
+        <thead className='table-head'>
+          <tr className='table-row'>
             <th>Album</th>
             <th>Artist</th>
             <th>Released</th>
             <th>Genre</th>
-            <th>Actions</th>
+            <th className='table-row-actions'>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='table-body'>
           {albumInfo.map((albumInfo) => (
             <Fragment>
               {editAlbumId === albumInfo.id ? (
@@ -178,7 +184,7 @@ function App() {
 
       {/* SUMBIT ALBUM FORM */}
       <h2 className='form-header'>Add an album</h2>
-      <form onSubmit={handleAddFormSubmit}>
+      <form className='input-form-container' onSubmit={handleAddFormSubmit}>
         <input 
           type='text' 
           name='album' 
@@ -207,9 +213,13 @@ function App() {
           placeholder='Enter a genre' 
           onChange={handleAddFormChange}
         />
-        <button type='submit'>Add</button>
+        <button 
+          className='add-button'
+          type='submit'
+          >Add
+        </button>
       </form>
-
+      <Footer />            
     </div>
   );
 }
