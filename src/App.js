@@ -54,7 +54,7 @@ function App() {
     setEditAlbumData(newFormData)
   }
 
-  // Handles the submit logic of the form
+  // Submits data to the state and sets it
   const handleAddFormSubmit = (e) => {
     e.preventDefault()
 
@@ -67,9 +67,39 @@ function App() {
       genre: addAlbumData.genre
     }
 
-    // Create new album array to avoid mutating the state
+    // Creates a new album array to avoid mutating the state
     const newAlbumInfoArray = [...albumInfo, newAlbumInfo]
     setAlbumInfo(newAlbumInfoArray)
+  }
+
+  // Saves edited data to the current state to display on the table
+  const handleEditFormSubmit = (e) => {
+    e.preventDefault()
+
+    const editedAlbum = {
+      id: editAlbumId,
+      album: editAlbumData.album,
+      artist: editAlbumData.artist,
+      released: editAlbumData.released,
+      genre: editAlbumData.genre
+    }
+
+    // Replaces the original displayed album data with the newest 
+    // edited album data
+    const newEditedAlbumData = [ ...albumInfo]
+
+    // Will return an index based on a condition that's passed in.
+    // 'editAlbumId' is the row that is being edited. 
+    // findIndex() will get the index of said row in the albumInfo array.
+    const index = albumInfo.findIndex(
+      (albumInfo) => albumInfo.id === editAlbumId
+    )
+
+    // Update array at the given position
+    newEditedAlbumData[index] = editedAlbum
+
+    setAlbumInfo(newEditedAlbumData)
+    setEditAlbumId(null)
   }
 
   // Handles Edit button
@@ -87,10 +117,15 @@ function App() {
     setEditAlbumData(formValues)
   }
 
+  // Will cancel the currently edited row input before saving
+  const handleCancelClick = (e) => {
+    setEditAlbumId(null)
+  }
+
   return (
     <div className="app-container">
       <Header />
-      <form>
+      <form onSubmit={handleEditFormSubmit}>
       <table>
         {/* TABLE */}
         <thead>
@@ -109,6 +144,7 @@ function App() {
                   <EditableRow 
                     editAlbumData={editAlbumData} 
                     handleEditFormChange={handleEditFormChange} 
+                    handleCancelClick={handleCancelClick}
                   />
                 ) : (
                   <ReadOnlyRow 
