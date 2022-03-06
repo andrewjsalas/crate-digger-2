@@ -122,6 +122,23 @@ function App() {
     setEditAlbumId(null)
   }
 
+  // Deletes inilne row by re-rendering the albumInfo
+  // array with the selected row removed.
+  const handleDeleteClick = (editAlbumId) => {
+    const newAlbums = [...albumInfo]
+
+    // finds the id of a given album input
+    const index = albumInfo.findIndex((albumInfo) => 
+    albumInfo.id === editAlbumId)
+
+    // Uses the splice method to remove the albumInfo object at the 
+    // given index in the array.
+    // '1' indicates that only one should be removed.
+    newAlbums.splice(index, 1)
+
+    setAlbumInfo(newAlbums)
+  }
+
   return (
     <div className="app-container">
       <Header />
@@ -150,6 +167,7 @@ function App() {
                   <ReadOnlyRow 
                     albumInfo={albumInfo} 
                     handleEditClick={handleEditClick}
+                    handleDeleteClick={handleDeleteClick}
                   />
               )}           
             </Fragment>
